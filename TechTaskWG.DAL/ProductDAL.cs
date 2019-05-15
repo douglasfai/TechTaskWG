@@ -21,11 +21,11 @@ namespace TechTaskWG.DAL
         {
             try
             {
-                command = new MySqlCommand("INSERT INTO product(nome, descricao, quantidade, preco) VALUES (?, ?, ?, ?)", connection);
-                command.Parameters.Add("@nome", MySqlDbType.VarChar, 50).Value = obj.Name;
-                command.Parameters.Add("@descricao", MySqlDbType.VarChar, 100).Value = obj.Description;
-                command.Parameters.Add("@quantidade", MySqlDbType.Int32).Value = obj.Amount;
-                command.Parameters.Add("@preco", MySqlDbType.Float).Value = obj.Price;
+                command = new MySqlCommand("INSERT INTO product(name, description, amount, price) VALUES (?, ?, ?, ?)", connection);
+                command.Parameters.Add("@name", MySqlDbType.VarChar, 50).Value = obj.Name;
+                command.Parameters.Add("@description", MySqlDbType.VarChar, 100).Value = obj.Description;
+                command.Parameters.Add("@amount", MySqlDbType.Int32).Value = obj.Amount;
+                command.Parameters.Add("@price", MySqlDbType.Float).Value = obj.Price;
                 command.ExecuteNonQuery();
 
                 return "Successful registration!";
@@ -74,18 +74,6 @@ namespace TechTaskWG.DAL
             {
                 command = new MySqlCommand("SELECT * FROM product", connection);
                 command.CommandType = CommandType.Text;
-
-                //using (command = new MySqlCommand("SELECT * FROM products", connection))
-                //{
-                //    using (MySqlDataReader dataReader = command.ExecuteReader())
-                //    {
-                //        while (dataReader.Read())
-                //        {
-                //            columnData.Add(dataReader.GetString(0));
-                //        }
-                //    }
-                //}
-
 
                 MySqlDataReader dataReader = command.ExecuteReader();
 
@@ -160,7 +148,7 @@ namespace TechTaskWG.DAL
         {
             try
             {
-                command = new MySqlCommand("UPDATE product SET nome = ?, descricao = ?, quantidade = ?, preco = ? WHERE id = ?", connection);
+                command = new MySqlCommand("UPDATE product SET name = ?, description = ?, amount = ?, price = ? WHERE id = ?", connection);
                 command.Parameters.Clear();
                 command.Parameters.Add("@name", MySqlDbType.VarChar, 50).Value = obj.Name;
                 command.Parameters.Add("@description", MySqlDbType.VarChar, 100).Value = obj.Description;
