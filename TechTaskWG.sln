@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTaskWG.BLL", "TechTaskW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTaskWG.Host", "TechTaskWG.Host\TechTaskWG.Host.csproj", "{CC1AACF0-C571-446F-9D5A-F0CE5664168E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTaskWG.Client", "TechTaskWG.Client\TechTaskWG.Client.csproj", "{CFAD71FC-9F7B-4E71-8837-BA8CF6DA76D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{CC1AACF0-C571-446F-9D5A-F0CE5664168E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC1AACF0-C571-446F-9D5A-F0CE5664168E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC1AACF0-C571-446F-9D5A-F0CE5664168E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFAD71FC-9F7B-4E71-8837-BA8CF6DA76D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFAD71FC-9F7B-4E71-8837-BA8CF6DA76D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFAD71FC-9F7B-4E71-8837-BA8CF6DA76D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFAD71FC-9F7B-4E71-8837-BA8CF6DA76D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
