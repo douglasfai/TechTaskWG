@@ -34,8 +34,8 @@ namespace TechTaskWG.Host.Controllers
             return productBLL.Create(product);
         }
 
-        public string Put(int Id, [FromBody]Product product)
-        {
+        public string Put([FromBody]Product product)
+        {            
             return productBLL.Update(product);
         }
 

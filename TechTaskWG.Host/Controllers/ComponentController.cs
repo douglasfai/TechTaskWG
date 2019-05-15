@@ -32,7 +32,7 @@ namespace TechTaskWG.Host.Controllers
             return componentBLL.Create(component);
         }
 
-        public string Put(int Id, [FromBody]Component component)
+        public string Put([FromBody]Component component)
         {
             return componentBLL.Update(component);
         }
