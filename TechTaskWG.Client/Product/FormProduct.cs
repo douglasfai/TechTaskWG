@@ -14,7 +14,13 @@ namespace TechTaskWG.Client
     {
         public FormProduct()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            UpdateDgvProducts();
+        }
+
+        public void UpdateDgvProducts()
+        {
+            dgvProducts.DataSource = ProductCtrl.GetAll();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -24,29 +30,61 @@ namespace TechTaskWG.Client
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            FormProductForm formProductForm = new FormProductForm();
+            FormProductForm formProductForm = new FormProductForm(this);
             formProductForm.Show();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            FormProductForm formProductForm = new FormProductForm();
-            formProductForm.Show();                        
+            int id = this.GetIdInDvg();
+            if (id > 0)
+            {
+                FormProductForm formProductForm = new FormProductForm(this, id);
+                formProductForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nenhum item selecionado!");
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        private void Delete(int Id)
-        {
-            
+            int id = this.GetIdInDvg();
+            if (id > 0)
+            {
+                if (MessageBox.Show("Esta operação é irreversível. Deseja continuar?", "Confirmação de exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string message = ProductCtrl.Delete(id);
+                    UpdateDgvProducts();
+                    MessageBox.Show(message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nenhum item selecionado!");
+            }
         }
 
         private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            if (e.RowIndex > 0)
+            {
+                DataGridViewRow row = this.dgvProducts.Rows[e.RowIndex];
+                MessageBox.Show(row.Cells["id"].Value.ToString());
+            }
         }
+
+        private int GetIdInDvg()
+        {
+            int id = 0;
+            if (dgvProducts.Rows.GetRowCount(DataGridViewElementStates.Selected) > 0)
+            {
+                DataGridViewRow row = this.dgvProducts.Rows[dgvProducts.SelectedRows[0].Index];
+                id = Convert.ToInt32(row.Cells["id"].Value.ToString());
+            }
+            return id;
+        }
+
     }
 }

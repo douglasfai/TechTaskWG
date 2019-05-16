@@ -54,6 +54,7 @@
             this.dgvComponents.Name = "dgvComponents";
             this.dgvComponents.Size = new System.Drawing.Size(360, 190);
             this.dgvComponents.TabIndex = 1;
+            this.dgvComponents.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponents_CellContentClick);
             // 
             // btnNew
             // 
@@ -83,6 +84,7 @@
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Excluir";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // lblTitle
             // 

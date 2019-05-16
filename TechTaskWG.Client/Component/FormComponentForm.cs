@@ -11,22 +11,50 @@ namespace TechTaskWG.Client.Component
 {
     public partial class FormComponentForm : Form
     {
-        public FormComponentForm()
-        {
-            InitializeComponent();
-            this.tbId.Select();
-        }
+        private FormComponent formComponent;
 
-        public FormComponentForm(Int32 Id)
+        public FormComponentForm(FormComponent formComponent, int Id = 0)
         {
             InitializeComponent();
-            this.tbId.Text = Id.ToString();
-            this.tbId.ReadOnly = true;
+
+            this.formComponent = formComponent;
+
+            this.tbId.Enabled = false;
+
+            if (Id > 0)
+            {
+                DTO.Component component = ComponentCtrl.GetById(Id);
+
+                this.tbId.Text = Id.ToString();
+                tbName.Text = component.Name;
+                tbDescription.Text = component.Description;
+                tbAmount.Text = component.Amount.ToString();
+                tbPrice.Text = component.Price.ToString();
+                this.tbId.ReadOnly = true;
+            }
+
             this.tbName.Select();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            DTO.Component component = new DTO.Component();
+            if (tbId.Text != "")
+            {
+                component.Id = Convert.ToInt32(tbId.Text);
+            }
+            component.Name = tbName.Text;
+            component.Description = tbDescription.Text;
+            component.Amount = Convert.ToInt32(tbAmount.Text);
+            component.Price = Convert.ToInt32(tbPrice.Text);
+            string message = ComponentCtrl.Save(component);
+            this.formProduct.UpdateDgvComponents();
+            MessageBox.Show(message);
             this.Close();
         }
     }
