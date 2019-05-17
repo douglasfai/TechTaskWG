@@ -39,6 +39,7 @@ namespace TechTaskWG.DAL
                 if (connection != null)
                 {
                     connection.Close();
+                    connection.Dispose();
                 }
             }
         }
@@ -64,6 +65,7 @@ namespace TechTaskWG.DAL
                 if (connection != null)
                 {
                     connection.Close();
+                    connection.Dispose();
                 }
             }
         }
@@ -104,6 +106,7 @@ namespace TechTaskWG.DAL
                 if (connection != null)
                 {
                     connection.Close();
+                    connection.Dispose();
                 }
             }
         }
@@ -142,6 +145,7 @@ namespace TechTaskWG.DAL
                 if (connection != null)
                 {
                     connection.Close();
+                    connection.Dispose();
                 }
             }
         }
@@ -172,6 +176,7 @@ namespace TechTaskWG.DAL
                 if (connection != null)
                 {
                     connection.Close();
+                    connection.Dispose();
                 }
             }
         }
