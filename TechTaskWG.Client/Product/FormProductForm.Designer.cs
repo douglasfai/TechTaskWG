@@ -42,6 +42,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlProduct = new System.Windows.Forms.Panel();
+            this.clbComponents = new System.Windows.Forms.CheckedListBox();
             this.pnlProduct.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +77,7 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(11, 71);
+            this.lblDescription.Location = new System.Drawing.Point(11, 66);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(55, 13);
             this.lblDescription.TabIndex = 3;
@@ -85,7 +86,7 @@
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
-            this.lblAmount.Location = new System.Drawing.Point(11, 173);
+            this.lblAmount.Location = new System.Drawing.Point(11, 161);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(62, 13);
             this.lblAmount.TabIndex = 4;
@@ -94,7 +95,7 @@
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(149, 173);
+            this.lblPrice.Location = new System.Drawing.Point(149, 161);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(35, 13);
             this.lblPrice.TabIndex = 5;
@@ -116,7 +117,7 @@
             // 
             // tbDescription
             // 
-            this.tbDescription.Location = new System.Drawing.Point(14, 87);
+            this.tbDescription.Location = new System.Drawing.Point(14, 82);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(325, 67);
@@ -124,21 +125,21 @@
             // 
             // tbAmount
             // 
-            this.tbAmount.Location = new System.Drawing.Point(14, 189);
+            this.tbAmount.Location = new System.Drawing.Point(14, 177);
             this.tbAmount.Name = "tbAmount";
             this.tbAmount.Size = new System.Drawing.Size(100, 20);
             this.tbAmount.TabIndex = 9;
             // 
             // tbPrice
             // 
-            this.tbPrice.Location = new System.Drawing.Point(152, 189);
+            this.tbPrice.Location = new System.Drawing.Point(152, 177);
             this.tbPrice.Name = "tbPrice";
             this.tbPrice.Size = new System.Drawing.Size(100, 20);
             this.tbPrice.TabIndex = 10;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(215, 276);
+            this.btnSave.Location = new System.Drawing.Point(214, 427);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 11;
@@ -148,7 +149,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(296, 276);
+            this.btnClose.Location = new System.Drawing.Point(295, 427);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 12;
@@ -170,14 +171,23 @@
             this.pnlProduct.Controls.Add(this.tbId);
             this.pnlProduct.Location = new System.Drawing.Point(10, 40);
             this.pnlProduct.Name = "pnlProduct";
-            this.pnlProduct.Size = new System.Drawing.Size(360, 230);
+            this.pnlProduct.Size = new System.Drawing.Size(360, 210);
             this.pnlProduct.TabIndex = 13;
+            // 
+            // clbComponents
+            // 
+            this.clbComponents.FormattingEnabled = true;
+            this.clbComponents.Location = new System.Drawing.Point(12, 261);
+            this.clbComponents.Name = "clbComponents";
+            this.clbComponents.Size = new System.Drawing.Size(358, 154);
+            this.clbComponents.TabIndex = 14;
             // 
             // FormProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 312);
+            this.ClientSize = new System.Drawing.Size(384, 462);
+            this.Controls.Add(this.clbComponents);
             this.Controls.Add(this.pnlProduct);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
@@ -208,5 +218,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Panel pnlProduct;
+        private System.Windows.Forms.CheckedListBox clbComponents;
     }
 }

@@ -22,7 +22,6 @@ namespace TechTaskWG.Client.Product
 
                 if (product.Id > 0)
                 {
-                    //response = await client.PutAsJsonAsync("product/" + product.Id, product);
                     response = client.PutAsJsonAsync("product", product).Result;
                 }
                 else

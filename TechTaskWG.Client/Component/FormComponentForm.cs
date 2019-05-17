@@ -51,9 +51,9 @@ namespace TechTaskWG.Client.Component
             component.Name = tbName.Text;
             component.Description = tbDescription.Text;
             component.Amount = Convert.ToInt32(tbAmount.Text);
-            component.Price = Convert.ToInt32(tbPrice.Text);
+            component.Price = Convert.ToDouble(tbPrice.Text);
             string message = ComponentCtrl.Save(component);
-            this.formProduct.UpdateDgvComponents();
+            this.formComponent.UpdateDgvComponents();
             MessageBox.Show(message);
             this.Close();
         }

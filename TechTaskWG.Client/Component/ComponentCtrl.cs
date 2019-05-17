@@ -22,7 +22,6 @@ namespace TechTaskWG.Client.Component
 
                 if (component.Id > 0)
                 {
-                    //response = await client.PutAsJsonAsync("product/" + product.Id, product);
                     response = client.PutAsJsonAsync("component", component).Result;
                 }
                 else
@@ -44,7 +43,7 @@ namespace TechTaskWG.Client.Component
 
             using (client = new HttpClient { BaseAddress = new Uri(Properties.Settings.Default.ServerUrl) })
             {
-                using (var response = client.GetAsync("product").Result)
+                using (var response = client.GetAsync("component").Result)
                 {
                     if (response.IsSuccessStatusCode)
                     {
@@ -63,7 +62,7 @@ namespace TechTaskWG.Client.Component
 
             using (client = new HttpClient { BaseAddress = new Uri(Properties.Settings.Default.ServerUrl) })
             {
-                HttpResponseMessage response = client.GetAsync("product/" + Id).Result;
+                HttpResponseMessage response = client.GetAsync("component/" + Id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -82,7 +81,7 @@ namespace TechTaskWG.Client.Component
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(serverUrl);
-                HttpResponseMessage response = client.DeleteAsync("product/" + Id).Result;
+                HttpResponseMessage response = client.DeleteAsync("component/" + Id).Result;
 
                 message = response.IsSuccessStatusCode ? "Operação realizada com sucesso" : "Falha ao excluir o produto: " + response.StatusCode;
             }
