@@ -20,6 +20,7 @@ namespace TechTaskWG.Client
 
         public void UpdateDgvProducts()
         {
+            dgvProducts.AutoGenerateColumns = false;
             dgvProducts.DataSource = ProductCtrl.GetAll();
         }
 
@@ -71,7 +72,6 @@ namespace TechTaskWG.Client
             if (e.RowIndex > 0)
             {
                 DataGridViewRow row = this.dgvProducts.Rows[e.RowIndex];
-                MessageBox.Show(row.Cells["id"].Value.ToString());
             }
         }
 

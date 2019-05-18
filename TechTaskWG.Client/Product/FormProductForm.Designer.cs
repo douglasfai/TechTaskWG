@@ -43,7 +43,9 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlProduct = new System.Windows.Forms.Panel();
             this.clbComponents = new System.Windows.Forms.CheckedListBox();
+            this.gbComponents = new System.Windows.Forms.GroupBox();
             this.pnlProduct.SuspendLayout();
+            this.gbComponents.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -176,18 +178,30 @@
             // 
             // clbComponents
             // 
+            this.clbComponents.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.clbComponents.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.clbComponents.FormattingEnabled = true;
-            this.clbComponents.Location = new System.Drawing.Point(12, 261);
+            this.clbComponents.Location = new System.Drawing.Point(15, 22);
             this.clbComponents.Name = "clbComponents";
-            this.clbComponents.Size = new System.Drawing.Size(358, 154);
+            this.clbComponents.Size = new System.Drawing.Size(328, 120);
             this.clbComponents.TabIndex = 14;
+            // 
+            // gbComponents
+            // 
+            this.gbComponents.Controls.Add(this.clbComponents);
+            this.gbComponents.Location = new System.Drawing.Point(12, 265);
+            this.gbComponents.Name = "gbComponents";
+            this.gbComponents.Size = new System.Drawing.Size(358, 156);
+            this.gbComponents.TabIndex = 15;
+            this.gbComponents.TabStop = false;
+            this.gbComponents.Text = "Componentes";
             // 
             // FormProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 462);
-            this.Controls.Add(this.clbComponents);
+            this.Controls.Add(this.gbComponents);
             this.Controls.Add(this.pnlProduct);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
@@ -197,6 +211,7 @@
             this.Text = "TechTaskWG Client";
             this.pnlProduct.ResumeLayout(false);
             this.pnlProduct.PerformLayout();
+            this.gbComponents.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,5 +234,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Panel pnlProduct;
         private System.Windows.Forms.CheckedListBox clbComponents;
+        private System.Windows.Forms.GroupBox gbComponents;
     }
 }

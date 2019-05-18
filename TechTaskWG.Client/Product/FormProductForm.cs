@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using TechTaskWG.Client.Component;
@@ -60,33 +61,59 @@ namespace TechTaskWG.Client.Product
             if (tbId.Text != "")
             {
                 product.Id = Convert.ToInt32(tbId.Text);
-            }            
-            product.Name = tbName.Text;
-            product.Description = tbDescription.Text;
-            product.Amount = Convert.ToInt32(tbAmount.Text);
-            product.Price = Convert.ToDouble(tbPrice.Text);
-            
-            if (clbComponents.Items.Count > 0)
-            {
-                List<DTO.Component> productComponents = new List<DTO.Component>();
-
-                int quantityOfComponentsChecked = clbComponents.Items.Count;
-
-                for (int i = 0; i < quantityOfComponentsChecked; i++)
-                {
-                    if (clbComponents.GetItemChecked(i))
-                    {
-                        productComponents.Add(new DTO.Component() { Id = componentsList[i].Id });
-                    }
-                }
-                product.Components = productComponents;
             }
-            
+            else
+            {
+                string hostName = Dns.GetHostName();
+                IPAddress[] ip = Dns.GetHostAddresses(hostName);
+                product.Ip = ip[1].ToString();
+            }
 
-            string message = ProductCtrl.Save(product);
-            this.formProduct.UpdateDgvProducts();
-            MessageBox.Show(message);
-            this.Close();
+            string validationMessage = "";
+            if (tbName.Text.Trim() == "")
+                validationMessage += "Nome do produto é obrigatório. ";
+
+            int amount;
+            if (!int.TryParse(tbAmount.Text, out amount))
+                validationMessage += "Quantidade deve ser inteiro. ";
+
+            double price;
+            if (!double.TryParse(tbPrice.Text, out price))
+                validationMessage += "Preço inválido!";
+
+            if (validationMessage == "")
+            {
+                product.Name = tbName.Text;
+                product.Description = tbDescription.Text;
+                product.Amount = Convert.ToInt32(tbAmount.Text);
+                product.Price = Convert.ToDouble(tbPrice.Text);
+
+                if (clbComponents.Items.Count > 0)
+                {
+                    List<DTO.Component> productComponents = new List<DTO.Component>();
+
+                    int quantityOfComponentsChecked = clbComponents.Items.Count;
+
+                    for (int i = 0; i < quantityOfComponentsChecked; i++)
+                    {
+                        if (clbComponents.GetItemChecked(i))
+                        {
+                            productComponents.Add(new DTO.Component() { Id = componentsList[i].Id });
+                        }
+                    }
+                    product.Components = productComponents;
+                }
+
+
+                string message = ProductCtrl.Save(product);
+                this.formProduct.UpdateDgvProducts();
+                MessageBox.Show(message);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(validationMessage);
+            }
         }
     }
 }

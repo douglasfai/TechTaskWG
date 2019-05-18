@@ -10,5 +10,7 @@ namespace TechTaskWG.DTO
     {
         [DataMember]
         public List<Component> Components { get; set; }
+        [DataMember]
+        public string Ip { get; set; }
     }
 }

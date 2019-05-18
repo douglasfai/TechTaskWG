@@ -48,14 +48,34 @@ namespace TechTaskWG.Client.Component
             {
                 component.Id = Convert.ToInt32(tbId.Text);
             }
-            component.Name = tbName.Text;
-            component.Description = tbDescription.Text;
-            component.Amount = Convert.ToInt32(tbAmount.Text);
-            component.Price = Convert.ToDouble(tbPrice.Text);
-            string message = ComponentCtrl.Save(component);
-            this.formComponent.UpdateDgvComponents();
-            MessageBox.Show(message);
-            this.Close();
+
+            string validationMessage = "";
+            if (tbName.Text.Trim() == "")
+                validationMessage += "Nome do componente é obrigatório. ";
+
+            int amount;
+            if (!int.TryParse(tbAmount.Text, out amount))
+                validationMessage += "Quantidade deve ser inteiro. ";
+
+            double price;
+            if (!double.TryParse(tbPrice.Text, out price))
+                validationMessage += "Preço inválido!";
+
+            if (validationMessage == "")
+            {
+                component.Name = tbName.Text;
+                component.Description = tbDescription.Text;
+                component.Amount = Convert.ToInt32(tbAmount.Text);
+                component.Price = Convert.ToDouble(tbPrice.Text);
+                string message = ComponentCtrl.Save(component);
+                this.formComponent.UpdateDgvComponents();
+                MessageBox.Show(message);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(validationMessage);
+            }
         }
     }
 }

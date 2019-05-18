@@ -28,21 +28,26 @@ namespace TechTaskWG.DAL
                 command.Connection = connection;
                 command.Transaction = transaction;
 
-                command.CommandText = "INSERT INTO product(name, description, amount, price) VALUES (?, ?, ?, ?)";
+                command.CommandText = "INSERT INTO product(name, description, amount, price, ip) VALUES (?, ?, ?, ?, ?)";
                 command.Parameters.Add("@name", MySqlDbType.VarChar, 50).Value = obj.Name;
                 command.Parameters.Add("@description", MySqlDbType.VarChar, 100).Value = obj.Description;
                 command.Parameters.Add("@amount", MySqlDbType.Int32).Value = obj.Amount;
                 command.Parameters.Add("@price", MySqlDbType.Float).Value = obj.Price;
+                command.Parameters.Add("@ip", MySqlDbType.VarChar, 40).Value = obj.Ip;
                 command.ExecuteNonQuery();
                                 
                 int lastInsertedId = (int) command.LastInsertedId;
-                string sql = "INSERT INTO product_component(product_id, component_id) VALUES ";
-                foreach(Component component in obj.Components)
+
+                if (obj.Components.Count > 0)
                 {
-                    sql += "(" + lastInsertedId + ", " + component.Id + "),";                    
-                }
-                command.CommandText = sql.Substring(0, sql.Length - 1);
-                command.ExecuteNonQuery();
+                    string sql = "INSERT INTO product_component(product_id, component_id) VALUES ";
+                    foreach (Component component in obj.Components)
+                    {
+                        sql += "(" + lastInsertedId + ", " + component.Id + "),";
+                    }
+                    command.CommandText = sql.Substring(0, sql.Length - 1);
+                    command.ExecuteNonQuery();
+                }                
                 transaction.Commit();
 
                 return "Successful registration!";
@@ -107,7 +112,8 @@ namespace TechTaskWG.DAL
                         Name = dataReader.GetString(1),
                         Description = dataReader.GetString(2),
                         Amount = dataReader.GetInt32(3),
-                        Price = dataReader.GetDouble(4)
+                        Price = dataReader.GetDouble(4),                        
+                        Ip = dataReader.GetString(6)
                     };
 
                     products.Add(product);
@@ -136,9 +142,9 @@ namespace TechTaskWG.DAL
                 command = new MySqlCommand("SELECT p.id, p.name, p.description, p.amount, p.price, " +
                     "c.id c_id, c.name c_name, c.description c_description, c.amount c_amount, c.price c_price " +
                     "FROM product p " +
-                    "INNER JOIN product_component pc ON p.id = pc.product_id " +
-                    "INNER JOIN component c ON pc.component_id = c.id " +
-                    "WHERE p.id = ?", connection);
+                    "LEFT JOIN product_component pc ON p.id = pc.product_id " +
+                    "LEFT JOIN component c ON pc.component_id = c.id " +
+                    "WHERE p.id = @id", connection);
                 command.Parameters.Clear();
                 command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
                 command.CommandType = CommandType.Text; 
@@ -156,20 +162,23 @@ namespace TechTaskWG.DAL
                     Components = new List<Component>()
                 };
 
-                Component component;
-                do
+                if (dataReader.GetInt32(5) > 0)
                 {
-                    component = new Component()
+                    Component component;
+                    do
                     {
-                        Id = dataReader.GetInt32(5),
-                        Name = dataReader.GetString(6),
-                        Description = dataReader.GetString(7),
-                        Amount = dataReader.GetInt32(8),
-                        Price = dataReader.GetDouble(9)
-                    };
-                    product.Components.Add(component);
-                } while (dataReader.Read());
-
+                        component = new Component()
+                        {
+                            Id = dataReader.GetInt32(5),
+                            Name = dataReader.GetString(6),
+                            Description = dataReader.GetString(7),
+                            Amount = dataReader.GetInt32(8),
+                            Price = dataReader.GetDouble(9)
+                        };
+                        product.Components.Add(component);
+                    } while (dataReader.Read());
+                }
+                
                 return product;
             }
             catch (Exception ex)

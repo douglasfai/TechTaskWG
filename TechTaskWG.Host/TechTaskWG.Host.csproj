@@ -66,10 +66,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TechTaskWG.BLL">
+    <Reference Include="TechTaskWG.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\TechTaskWG.BLL\bin\Debug\TechTaskWG.BLL.dll</HintPath>
     </Reference>
-    <Reference Include="TechTaskWG.DAL">
+    <Reference Include="TechTaskWG.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\TechTaskWG.DAL\bin\Debug\TechTaskWG.DAL.dll</HintPath>
     </Reference>
     <Reference Include="TechTaskWG.DTO">
