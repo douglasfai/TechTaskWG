@@ -55,8 +55,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TechTaskWG.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="TechTaskWG.DTO">
       <HintPath>..\TechTaskWG.DTO\bin\Debug\TechTaskWG.DTO.dll</HintPath>
     </Reference>
   </ItemGroup>

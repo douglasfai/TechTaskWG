@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration.Install;
 using System.Linq;
+using System.ServiceProcess;
 
 namespace TechTaskWG.WinService
 {
@@ -13,6 +14,11 @@ namespace TechTaskWG.WinService
         public ProjectInstaller()
         {
             InitializeComponent();
+        }
+
+        private void serviceInstaller1_AfterInstall(object sender, InstallEventArgs e)
+        {
+            new ServiceController(serviceInstaller1.ServiceName).Start();
         }
     }
 }

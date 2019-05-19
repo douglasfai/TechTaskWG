@@ -64,10 +64,10 @@
       <HintPath>..\TechTaskWG.BLL\bin\Debug\TechTaskWG.BLL.dll</HintPath>
     </Reference>
     <Reference Include="TechTaskWG.DAL">
-      <HintPath>..\TechTaskWG.BLL\bin\Debug\TechTaskWG.DAL.dll</HintPath>
+      <HintPath>..\TechTaskWG.DAL\bin\Debug\TechTaskWG.DAL.dll</HintPath>
     </Reference>
     <Reference Include="TechTaskWG.DTO">
-      <HintPath>..\TechTaskWG.BLL\bin\Debug\TechTaskWG.DTO.dll</HintPath>
+      <HintPath>..\TechTaskWG.DTO\bin\Debug\TechTaskWG.DTO.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
