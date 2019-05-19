@@ -119,7 +119,8 @@ namespace TechTaskWG.DAL
                         Name = dataReader.GetString(1),
                         Description = dataReader.GetString(2),
                         Amount = dataReader.GetInt32(3),
-                        Price = dataReader.GetDouble(4),                        
+                        Price = dataReader.GetDouble(4), 
+                        CreationDate = dataReader.GetDateTime(5),
                         Ip = dataReader.GetString(6)
                     };
 

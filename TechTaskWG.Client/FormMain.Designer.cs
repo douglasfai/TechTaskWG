@@ -33,6 +33,7 @@
             this.tsmiProduct = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsiComponent = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHistoric = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,6 +41,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiRegister,
+            this.tsmiHistoric,
             this.tsmiClose});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -59,14 +61,14 @@
             // tsmiProduct
             // 
             this.tsmiProduct.Name = "tsmiProduct";
-            this.tsmiProduct.Size = new System.Drawing.Size(144, 22);
+            this.tsmiProduct.Size = new System.Drawing.Size(180, 22);
             this.tsmiProduct.Text = "&Produto";
             this.tsmiProduct.Click += new System.EventHandler(this.tsmiProduct_Click);
             // 
             // tmsiComponent
             // 
             this.tmsiComponent.Name = "tmsiComponent";
-            this.tmsiComponent.Size = new System.Drawing.Size(144, 22);
+            this.tmsiComponent.Size = new System.Drawing.Size(180, 22);
             this.tmsiComponent.Text = "C&omponente";
             this.tmsiComponent.Click += new System.EventHandler(this.tmsiComponent_Click);
             // 
@@ -78,6 +80,13 @@
             this.tsmiClose.Size = new System.Drawing.Size(38, 20);
             this.tsmiClose.Text = "&Sair";
             this.tsmiClose.Click += new System.EventHandler(this.tsmiClose_Click);
+            // 
+            // tsmiHistoric
+            // 
+            this.tsmiHistoric.Name = "tsmiHistoric";
+            this.tsmiHistoric.Size = new System.Drawing.Size(67, 20);
+            this.tsmiHistoric.Text = "&Histórico";
+            this.tsmiHistoric.Click += new System.EventHandler(this.tsmiHistoric_Click);
             // 
             // FormMain
             // 
@@ -104,6 +113,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiProduct;
         private System.Windows.Forms.ToolStripMenuItem tmsiComponent;
         private System.Windows.Forms.ToolStripMenuItem tsmiClose;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHistoric;
     }
 }
 

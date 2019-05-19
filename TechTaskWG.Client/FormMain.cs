@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using TechTaskWG.Client.Product;
 
 namespace TechTaskWG.Client
 {
@@ -49,6 +50,12 @@ namespace TechTaskWG.Client
                     e.Cancel = true;
                 }
             }            
+        }
+
+        private void tsmiHistoric_Click(object sender, EventArgs e)
+        {
+            FormHistoric formHistoric = new FormHistoric();
+            formHistoric.Show();
         }
     }
 }

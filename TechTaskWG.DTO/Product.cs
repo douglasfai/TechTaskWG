@@ -12,5 +12,7 @@ namespace TechTaskWG.DTO
         public List<Component> Components { get; set; }
         [DataMember]
         public string Ip { get; set; }
+        [DataMember]
+        public DateTime CreationDate { get; set; }
     }
 }

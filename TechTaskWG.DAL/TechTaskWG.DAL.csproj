@@ -41,7 +41,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TechTaskWG.DTO">
+    <Reference Include="TechTaskWG.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\TechTaskWG.DTO\bin\Debug\TechTaskWG.DTO.dll</HintPath>
     </Reference>
   </ItemGroup>
