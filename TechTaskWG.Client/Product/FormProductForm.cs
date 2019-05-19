@@ -27,27 +27,38 @@ namespace TechTaskWG.Client.Product
 
             productComponents = null;
 
-            if (Id > 0)
+            try
             {
-                DTO.Product product = ProductCtrl.GetById(Id);
+                if (Id > 0)
+                {
+                    DTO.Product product = ProductCtrl.GetById(Id);
 
-                this.tbId.Text = Id.ToString();
-                tbName.Text = product.Name;
-                tbDescription.Text = product.Description;
-                tbAmount.Text = product.Amount.ToString();
-                tbPrice.Text = product.Price.ToString();                
-                this.tbId.ReadOnly = true;
+                    this.tbId.Text = Id.ToString();
+                    tbName.Text = product.Name;
+                    tbDescription.Text = product.Description;
+                    tbAmount.Text = product.Amount.ToString();
+                    tbPrice.Text = product.Price.ToString("0.00");
+                    this.tbId.ReadOnly = true;
 
-                productComponents = (from component in product.Components select component.Id).ToList();
+                    productComponents = (from component in product.Components select component.Id).ToList();
+                }
+
+                componentsList = ComponentCtrl.GetAll();
+                foreach (var component in componentsList)
+                {
+                    clbComponents.Items.Add(component.Name, productComponents != null && productComponents.Contains(component.Id));
+                }
+
+                this.tbName.Select();
             }
-
-            componentsList = ComponentCtrl.GetAll();
-            foreach (var component in componentsList)
+            catch (AggregateException ex)
             {
-                clbComponents.Items.Add(component.Name, productComponents != null && productComponents.Contains(component.Id));
+                MessageBox.Show("Aplicação servidora não responde: " + ex.Message);
             }
-
-            this.tbName.Select();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problema na solicitação: " + ex.Message);
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -85,8 +96,8 @@ namespace TechTaskWG.Client.Product
             {
                 product.Name = tbName.Text;
                 product.Description = tbDescription.Text;
-                product.Amount = Convert.ToInt32(tbAmount.Text);
-                product.Price = Convert.ToDouble(tbPrice.Text);
+                product.Amount = amount;
+                product.Price = price;
 
                 if (clbComponents.Items.Count > 0)
                 {
@@ -104,11 +115,21 @@ namespace TechTaskWG.Client.Product
                     product.Components = productComponents;
                 }
 
-
-                string message = ProductCtrl.Save(product);
-                this.formProduct.UpdateDgvProducts();
-                MessageBox.Show(message);
-                this.Close();
+                try
+                { 
+                    string message = ProductCtrl.Save(product);
+                    this.formProduct.UpdateDgvProducts();
+                    MessageBox.Show(message);
+                    this.Close();
+                }
+                catch (AggregateException ex)
+                {
+                    MessageBox.Show("Operação não realizada porque a aplicação servidora não responde: " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Operação não realizada. Problema na solicitação: " + ex.Message);
+                }
             }
             else
             {

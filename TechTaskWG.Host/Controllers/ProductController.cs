@@ -16,17 +16,38 @@ namespace TechTaskWG.Host.Controllers
 
         public ProductController()
         {
-            productBLL = (ProductBLL)BLLLocator.GetProductBLL();
+            try
+            { 
+                productBLL = (ProductBLL)BLLLocator.GetProductBLL();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IEnumerable<Product> Get()
         {
-            return productBLL.ReadAll();
+            try
+            {
+                return productBLL.ReadAll();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public Product Get(int Id)
         {
-            return productBLL.ReadById(Id);
+            try
+            { 
+                return productBLL.ReadById(Id);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public string Post([FromBody]Product product)

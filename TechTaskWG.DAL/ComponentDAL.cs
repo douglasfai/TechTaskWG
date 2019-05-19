@@ -13,8 +13,15 @@ namespace TechTaskWG.DAL
 
         public ComponentDAL()
         {
-            connection = new MySqlConnection(Properties.Settings.Default.ConnectionString);
-            connection.Open();
+            try
+            { 
+                connection = new MySqlConnection(Properties.Settings.Default.ConnectionString);
+                connection.Open();
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
         }
 
         public string Create(Component obj)
@@ -97,9 +104,13 @@ namespace TechTaskWG.DAL
 
                 return components;
             }
+            catch (MySqlException ex)
+            {
+                throw new Exception("SQL problem: " + ex);
+            }
             catch (Exception ex)
             {
-                return null;
+                throw new Exception("Operation failed: " + ex);
             }
             finally
             {
@@ -136,9 +147,13 @@ namespace TechTaskWG.DAL
                 connection.Close();
                 return component;
             }
+            catch (MySqlException ex)
+            {
+                throw new Exception("SQL problem: " + ex);
+            }
             catch (Exception ex)
             {
-                return null;
+                throw new Exception("Operation failed: " + ex);
             }
             finally
             {

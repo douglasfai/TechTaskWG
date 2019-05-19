@@ -14,17 +14,38 @@ namespace TechTaskWG.Host.Controllers
 
         public ComponentController()
         {
-            componentBLL = (ComponentBLL)BLLLocator.GetComponentBLL();
+            try
+            {
+                componentBLL = (ComponentBLL)BLLLocator.GetComponentBLL();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IEnumerable<Component> Get()
         {
-            return componentBLL.ReadAll();
+            try
+            { 
+                return componentBLL.ReadAll();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public Component Get(int Id)
         {
-            return componentBLL.ReadById(Id);
+            try
+            { 
+                return componentBLL.ReadById(Id);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public string Post([FromBody]Component component)

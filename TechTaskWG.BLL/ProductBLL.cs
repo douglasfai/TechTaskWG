@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TechTaskWG.DAL;
 using TechTaskWG.DTO;
 
@@ -10,7 +11,14 @@ namespace TechTaskWG.BLL
 
         public ProductBLL()
         {
-            dal = DALLocator.GetProductDAL();
+            try
+            { 
+                dal = DALLocator.GetProductDAL();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public string Create(Product obj)
@@ -25,12 +33,28 @@ namespace TechTaskWG.BLL
 
         public List<Product> ReadAll()
         {
-            return dal.ReadAll();
+            try
+            {
+                List<Product> products = dal.ReadAll();
+                return products;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Problem: " + ex);
+            }            
         }
 
         public Product ReadById(int id)
         {
-            return dal.ReadById(id);
+            try
+            {
+                Product product = dal.ReadById(id);
+                return product;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Problem: " + ex);
+            }
         }
 
         public string Update(Product obj)

@@ -21,19 +21,30 @@ namespace TechTaskWG.Client.Component
 
             this.tbId.Enabled = false;
 
-            if (Id > 0)
+            try
             {
-                DTO.Component component = ComponentCtrl.GetById(Id);
+                if (Id > 0)
+                {
+                    DTO.Component component = ComponentCtrl.GetById(Id);
 
-                this.tbId.Text = Id.ToString();
-                tbName.Text = component.Name;
-                tbDescription.Text = component.Description;
-                tbAmount.Text = component.Amount.ToString();
-                tbPrice.Text = component.Price.ToString();
-                this.tbId.ReadOnly = true;
+                    this.tbId.Text = Id.ToString();
+                    tbName.Text = component.Name;
+                    tbDescription.Text = component.Description;
+                    tbAmount.Text = component.Amount.ToString();
+                    tbPrice.Text = component.Price.ToString("0.00");
+                    this.tbId.ReadOnly = true;
+                }
+
+                this.tbName.Select();
             }
-
-            this.tbName.Select();
+            catch (AggregateException ex)
+            {
+                MessageBox.Show("Aplicação servidora não responde: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problema na solicitação: " + ex.Message);
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -65,12 +76,24 @@ namespace TechTaskWG.Client.Component
             {
                 component.Name = tbName.Text;
                 component.Description = tbDescription.Text;
-                component.Amount = Convert.ToInt32(tbAmount.Text);
-                component.Price = Convert.ToDouble(tbPrice.Text);
-                string message = ComponentCtrl.Save(component);
-                this.formComponent.UpdateDgvComponents();
-                MessageBox.Show(message);
-                this.Close();
+                component.Amount = amount;
+                component.Price = price;
+
+                try
+                { 
+                    string message = ComponentCtrl.Save(component);
+                    this.formComponent.UpdateDgvComponents();
+                    MessageBox.Show(message);
+                    this.Close();
+                }
+                catch (AggregateException ex)
+                {
+                    MessageBox.Show("Operação não realizada porque a aplicação servidora não responde: " + ex.Message);                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Operação não realizada. Problema na solicitação: " + ex.Message);                    
+                }                
             }
             else
             {

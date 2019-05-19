@@ -15,13 +15,25 @@ namespace TechTaskWG.Client
         public FormComponent()
         {
             InitializeComponent();
-            dgvComponents.DataSource = ComponentCtrl.GetAll();
+            UpdateDgvComponents();
         }
 
         public void UpdateDgvComponents()
         {
             dgvComponents.AutoGenerateColumns = false;
-            dgvComponents.DataSource = ComponentCtrl.GetAll();
+
+            try
+            { 
+                dgvComponents.DataSource = ComponentCtrl.GetAll();
+            }
+            catch (AggregateException ex)
+            {
+                MessageBox.Show("Aplicação servidora não responde: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problema na solicitação: " + ex.Message);
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -56,9 +68,19 @@ namespace TechTaskWG.Client
             {
                 if (MessageBox.Show("Esta operação é irreversível. Deseja continuar?", "Confirmação de exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    string message = ComponentCtrl.Delete(id);
-                    UpdateDgvComponents();
-                    MessageBox.Show(message);
+                    try
+                    { 
+                        string message = ComponentCtrl.Delete(id);
+                        UpdateDgvComponents();                        
+                    }
+                    catch (AggregateException ex)
+                    {
+                        MessageBox.Show("Aplicação servidora não responde: " + ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Problema na solicitação: " + ex.Message);
+                    }
                 }
             }
             else
@@ -78,11 +100,20 @@ namespace TechTaskWG.Client
         private int GetIdInDvg()
         {
             int id = 0;
-            if (dgvComponents.Rows.GetRowCount(DataGridViewElementStates.Selected) > 0)
+
+            try
             {
-                DataGridViewRow row = this.dgvComponents.Rows[dgvComponents.SelectedRows[0].Index];
-                id = Convert.ToInt32(row.Cells["id"].Value.ToString());
+                if (dgvComponents.Rows.GetRowCount(DataGridViewElementStates.Selected) > 0)
+                {
+                    DataGridViewRow row = this.dgvComponents.Rows[dgvComponents.SelectedRows[0].Index];
+                    id = Convert.ToInt32(row.Cells["id"].Value.ToString());
+                }
             }
+            catch (NullReferenceException ex)
+            {
+                
+            }
+
             return id;
         }
     }

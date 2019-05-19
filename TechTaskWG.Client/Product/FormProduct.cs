@@ -21,7 +21,19 @@ namespace TechTaskWG.Client
         public void UpdateDgvProducts()
         {
             dgvProducts.AutoGenerateColumns = false;
-            dgvProducts.DataSource = ProductCtrl.GetAll();
+
+            try
+            { 
+                dgvProducts.DataSource = ProductCtrl.GetAll();
+            }
+            catch (AggregateException ex)
+            {
+                MessageBox.Show("Aplicação servidora não responde: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problema na solicitação: " + ex.Message);
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -56,9 +68,19 @@ namespace TechTaskWG.Client
             {
                 if (MessageBox.Show("Esta operação é irreversível. Deseja continuar?", "Confirmação de exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    string message = ProductCtrl.Delete(id);
-                    UpdateDgvProducts();
-                    MessageBox.Show(message);
+                    try
+                    { 
+                        string message = ProductCtrl.Delete(id);
+                        UpdateDgvProducts();                        
+                    }
+                    catch (AggregateException ex)
+                    {
+                        MessageBox.Show("Aplicação servidora não responde: " + ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Problema na solicitação: " + ex.Message);
+                    }
                 }
             }
             else
@@ -78,12 +100,21 @@ namespace TechTaskWG.Client
         private int GetIdInDvg()
         {
             int id = 0;
-            if (dgvProducts.Rows.GetRowCount(DataGridViewElementStates.Selected) > 0)
-            {
-                DataGridViewRow row = this.dgvProducts.Rows[dgvProducts.SelectedRows[0].Index];
-                id = Convert.ToInt32(row.Cells["id"].Value.ToString());
+
+            try
+            { 
+                if (dgvProducts.Rows.GetRowCount(DataGridViewElementStates.Selected) > 0)
+                {
+                    DataGridViewRow row = this.dgvProducts.Rows[dgvProducts.SelectedRows[0].Index];
+                    id = Convert.ToInt32(row.Cells["id"].Value.ToString());
+                }
             }
-            return id;
+            catch (NullReferenceException ex)
+            {
+
+            }
+
+            return id;            
         }
 
     }

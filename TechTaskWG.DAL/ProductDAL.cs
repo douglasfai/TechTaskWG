@@ -14,8 +14,15 @@ namespace TechTaskWG.DAL
 
         public ProductDAL()
         {
-            connection = new MySqlConnection(Properties.Settings.Default.ConnectionString);
-            connection.Open();
+            try
+            {
+                connection = new MySqlConnection(Properties.Settings.Default.ConnectionString);
+                connection.Open();
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
         }
 
         public string Create(Product obj)
@@ -121,9 +128,13 @@ namespace TechTaskWG.DAL
 
                 return products;
             }
+            catch (MySqlException ex)
+            {
+                throw new Exception("SQL problem: " + ex);
+            }
             catch (Exception ex)
             {
-                return null;
+                throw new Exception("Operation failed: " + ex);
             }
             finally
             {
@@ -162,7 +173,7 @@ namespace TechTaskWG.DAL
                     Components = new List<Component>()
                 };
 
-                if (dataReader.GetInt32(5) > 0)
+                if (!dataReader.IsDBNull(5))
                 {
                     Component component;
                     do
@@ -181,9 +192,13 @@ namespace TechTaskWG.DAL
                 
                 return product;
             }
+            catch (MySqlException ex)
+            {
+                throw new Exception("SQL problem: " + ex);
+            }
             catch (Exception ex)
             {
-                return null;
+                throw new Exception("Operation failed: " + ex);
             }
             finally
             {

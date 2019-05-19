@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TechTaskWG.DAL;
 using TechTaskWG.DTO;
 
@@ -10,7 +11,14 @@ namespace TechTaskWG.BLL
 
         public ComponentBLL()
         {
-            dal = DALLocator.GetComponentDAL();
+            try
+            {
+                dal = DALLocator.GetComponentDAL();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public string Create(Component obj)
@@ -25,12 +33,28 @@ namespace TechTaskWG.BLL
 
         public List<Component> ReadAll()
         {
-            return dal.ReadAll();
+            try
+            {
+                List<Component> components = dal.ReadAll();
+                return components;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Problem: " + ex);
+            }
         }
 
         public Component ReadById(int id)
         {
-            return dal.ReadById(id);
+            try
+            {
+                Component component = dal.ReadById(id);
+                return component;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Problem: " + ex);
+            }
         }
 
         public string Update(Component obj)
