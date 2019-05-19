@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTaskWG.WinService", "Te
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TechTaskWG.WinServiceSetup", "TechTaskWG.WinServiceSetup\TechTaskWG.WinServiceSetup.vdproj", "{83780A24-7387-4AA4-A3B0-C09F7CB0FD55}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{E7B2421A-EB7C-43AA-A841-5389A90D692C}"
+	ProjectSection(SolutionItems) = preProject
+		ddl.sql = ddl.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
